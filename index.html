@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechAccessory - Магазин мобільних аксесуарів</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>TechAccessory</span>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Пошук товарів..." id="searchInput">
+                    <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <a href="#" class="cart-btn" onclick="openCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <a href="admin/login.html" class="admin-link">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Адмін</span>
+                    </a>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active" data-category="all">Всі товари</a></li>
+                    <li><a href="#" data-category="cases">Чохли</a></li>
+                    <li><a href="#" data-category="chargers">Зарядні пристрої</a></li>
+                    <li><a href="#" data-category="cables">Кабелі</a></li>
+                    <li><a href="#" data-category="audio">Навушники</a></li>
+                    <li><a href="#" data-category="protective">Захисне скло</a></li>
+                    <li><a href="#" data-category="holders">Тримачі</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Якісні аксесуари для ваших гаджетів</h1>
+                <p>Широкий вибір, доступні ціни, швидка доставка по Україні</p>
+                <button class="btn-primary" onclick="scrollToProducts()">Перейти до каталогу</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <h2 class="section-title">Каталог товарів</h2>
+            <div class="filters">
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="all">Будь-яка ціна</option>
+                    <option value="0-100">до 100 грн</option>
+                    <option value="100-300">100-300 грн</option>
+                    <option value="300-500">300-500 грн</option>
+                    <option value="500+">від 500 грн</option>
+                </select>
+                <select id="sortFilter" onchange="filterProducts()">
+                    <option value="default">За замовчуванням</option>
+                    <option value="price-asc">Ціна: низька до високої</option>
+                    <option value="price-desc">Ціна: висока до низької</option>
+                    <option value="name">За назвою</option>
+                </select>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content cart-modal">
+            <div class="modal-header">
+                <h2>Кошик</h2>
+                <button class="close-btn" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Разом:</span>
+                    <span id="cartTotal">0 грн</span>
+                </div>
+                <button class="btn-primary" onclick="checkout()">Оформити замовлення</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Оформлення замовлення</h2>
+                <button class="close-btn" onclick="closeCheckout()">&times;</button>
+            </div>
+            <form id="checkoutForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>ПІБ</label>
+                    <input type="text" required placeholder="Іванов Іван Іванович">
+                </div>
+                <div class="form-group">
+                    <label>Телефон</label>
+                    <input type="tel" required placeholder="+38 (___) ___-__-__">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Місто</label>
+                    <input type="text" required placeholder="Київ">
+                </div>
+                <div class="form-group">
+                    <label>Відділення Нової Пошти</label>
+                    <input type="text" required placeholder="№ відділення">
+                </div>
+                <div class="form-group">
+                    <label>Спосіб оплати</label>
+                    <select required>
+                        <option value="card">Онлайн карткою</option>
+                        <option value="cash">При отриманні</option>
+                        <option value="privat24">Privat24</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Підтвердити замовлення</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechAccessory</h3>
+                    <p>Найкращі аксесуари для мобільних пристроїв в Україні</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакти</h4>
+                    <p><i class="fas fa-phone"></i> +38 (099) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@techaccessory.ua</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Київ, вул. Хрещатик, 1</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Ми в соцмережах</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TechAccessory. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
