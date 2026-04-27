@@ -862,10 +862,16 @@ function submitOrder() {
     }, 500);
 }
 
-// Phone mask
+// Phone mask - Fixed version
 document.addEventListener('input', function(e) {
     if (e.target.id === 'customerPhone') {
+        const input = e.target;
+        const cursorPosition = input.selectionStart;
+        const oldValue = input.value;
+        
         let value = e.target.value.replace(/\D/g, '');
+        
+        // Remove country code prefix if present
         if (value.startsWith('380')) {
             value = value.substring(3);
         } else if (value.startsWith('80')) {
@@ -874,21 +880,31 @@ document.addEventListener('input', function(e) {
             value = value.substring(1);
         }
         
+        // Limit to 9 digits (Ukrainian mobile number without leading 0)
+        value = value.substring(0, 9);
+        
+        let formattedValue = '+38 ';
+        
         if (value.length > 0) {
-            value = '+38 (' + value.substring(0, 2);
-            if (value.length > 7) {
-                value = value.substring(0, 7) + ') ' + value.substring(7, 10);
-            }
-            if (value.length > 12) {
-                value = value.substring(0, 12) + '-' + value.substring(12, 14);
-            }
-            if (value.length > 15) {
-                value = value.substring(0, 15) + '-' + value.substring(15, 17);
-            }
-        } else {
-            value = '+38 ';
+            formattedValue += '(' + value.substring(0, 2);
         }
-        e.target.value = value;
+        if (value.length >= 2) {
+            formattedValue += ') ' + value.substring(2, 5);
+        }
+        if (value.length >= 5) {
+            formattedValue += '-' + value.substring(5, 7);
+        }
+        if (value.length >= 7) {
+            formattedValue += '-' + value.substring(7, 9);
+        }
+        
+        // Only update if value changed to prevent cursor jumping
+        if (oldValue !== formattedValue) {
+            input.value = formattedValue;
+            // Set cursor at the end
+            const newPosition = formattedValue.length;
+            input.setSelectionRange(newPosition, newPosition);
+        }
     }
 });
 
@@ -1034,3 +1050,18 @@ document.addEventListener('keydown', (e) => {
         });
     }
 });
+
+// ==================== INFO MODALS ====================
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('show');
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('show');
+    }
+}

@@ -84,8 +84,8 @@
                 <li><a href="#" data-category="powerbank"><i class="fas fa-battery-full"></i> PowerBank</a></li>
             </ul>
             <div class="nav-extra">
-                <a href="#about">Про нас</a>
-                <a href="#delivery">Доставка</a>
+                <a href="#" onclick="openModal('aboutModal'); return false;">Про нас</a>
+                <a href="#" onclick="openModal('deliveryModal'); return false;">Доставка</a>
                 <a href="#contacts">Контакти</a>
                 <a href="admin/login.html" class="admin-link"><i class="fas fa-lock"></i> Адмін</a>
             </div>
@@ -243,10 +243,10 @@
                 <div class="footer-col">
                     <h4>Інформація</h4>
                     <ul>
-                        <li><a href="#about">Про нас</a></li>
-                        <li><a href="#delivery">Доставка і оплата</a></li>
-                        <li><a href="#">Гарантія</a></li>
-                        <li><a href="#">Повернення</a></li>
+                        <li><a href="#" onclick="openModal('aboutModal'); return false;">Про нас</a></li>
+                        <li><a href="#" onclick="openModal('deliveryModal'); return false;">Доставка і оплата</a></li>
+                        <li><a href="#" onclick="openModal('warrantyModal'); return false;">Гарантія</a></li>
+                        <li><a href="#" onclick="openModal('returnModal'); return false;">Повернення</a></li>
                         <li><a href="admin/login.html">Особистий кабінет</a></li>
                     </ul>
                 </div>
@@ -465,6 +465,203 @@
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
+
+    <!-- Info Modals -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Про нас</h3>
+                <button class="close-btn" onclick="closeModal('aboutModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-content">
+                    <h4>TechAccessory - ваш надійний партнер у світі мобільних аксесуарів</h4>
+                    <p>Ми працюємо на ринку України з 2018 року і за цей час стали одним з лідерів у продажу якісних аксесуарів для мобільних пристроїв.</p>
+                    
+                    <h5>Наші переваги:</h5>
+                    <ul>
+                        <li>✓ Тільки оригінальна продукція від перевірених виробників</li>
+                        <li>✓ Більше 10 000 задоволених клієнтів</li>
+                        <li>✓ Власний склад у Києві - відправка в день замовлення</li>
+                        <li>✓ Гарантія якості на всі товари</li>
+                        <li>✓ Професійна консультація перед покупкою</li>
+                    </ul>
+                    
+                    <h5>Наша місія:</h5>
+                    <p>Забезпечити кожного клієнта якісними та доступними аксесуарами, які продовжують термін служби їхніх пристроїв та роблять використання зручнішим.</p>
+                    
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 30px; text-align: center;">
+                        <div>
+                            <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">50+</div>
+                            <div style="color: var(--gray-600);">Тисяч товарів продано</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">10K+</div>
+                            <div style="color: var(--gray-600);">Задоволених клієнтів</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">98%</div>
+                            <div style="color: var(--gray-600);">Позитивних відгуків</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">6+</div>
+                            <div style="color: var(--gray-600);">Років на ринку</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="deliveryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Доставка і оплата</h3>
+                <button class="close-btn" onclick="closeModal('deliveryModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-content">
+                    <h4>Способи доставки:</h4>
+                    
+                    <div class="delivery-option" style="margin: 20px 0; padding: 20px; background: var(--gray-50); border-radius: 8px;">
+                        <h5><i class="fas fa-truck" style="color: var(--primary);"></i> Нова Пошта</h5>
+                        <ul>
+                            <li>• Доставка у відділення: 1-2 дні, від 50 грн</li>
+                            <li>• Кур'єрська доставка: 1-2 дні, від 70 грн</li>
+                            <li>• Безкоштовно при замовленні від 1500 грн</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="delivery-option" style="margin: 20px 0; padding: 20px; background: var(--gray-50); border-radius: 8px;">
+                        <h5><i class="fas fa-box" style="color: var(--primary);"></i> Укрпошта</h5>
+                        <ul>
+                            <li>• Доставка у відділення: 2-4 дні, від 35 грн</li>
+                            <li>• Безкоштовно при замовленні від 1000 грн</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="delivery-option" style="margin: 20px 0; padding: 20px; background: var(--gray-50); border-radius: 8px;">
+                        <h5><i class="fas fa-store" style="color: var(--primary);"></i> Самовивіз</h5>
+                        <ul>
+                            <li>• Київ, вул. Хрещатик, 1 (ТЦ "Столиця")</li>
+                            <li>• Пн-Нд: 9:00 - 21:00</li>
+                            <li>• Безкоштовно</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Способи оплати:</h4>
+                    <ul style="margin: 20px 0;">
+                        <li>• Оплата карткою онлайн (Visa, Mastercard)</li>
+                        <li>• Google Pay / Apple Pay</li>
+                        <li>• Оплата при отриманні (післяплата)</li>
+                        <li>• Безготівковий розрахунок для юр. осіб</li>
+                    </ul>
+                    
+                    <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                        <strong>⚡ Швидка обробка:</strong> Замовлення, оформлені до 15:00, відправляються в той же день!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="warrantyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Гарантія</h3>
+                <button class="close-btn" onclick="closeModal('warrantyModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-content">
+                    <h4>Гарантійні зобов'язання</h4>
+                    <p>На всю продукцію TechAccessory надається офіційна гарантія виробника.</p>
+                    
+                    <h5>Гарантійні терміни:</h5>
+                    <ul style="margin: 20px 0;">
+                        <li>• Чохли та захисне скло - 14 днів</li>
+                        <li>• Кабелі та зарядні пристрої - 12 місяців</li>
+                        <li>• Навушники та аудіотехніка - 12 місяців</li>
+                        <li>• PowerBank - 12 місяців</li>
+                        <li>• Тримачі та аксесуари - 6 місяців</li>
+                    </ul>
+                    
+                    <h5>Гарантія не поширюється на:</h5>
+                    <ul style="margin: 20px 0;">
+                        <li>• Механічні пошкодження (удари, подряпини, тріщини)</li>
+                        <li>• Пошкодження від вологи або рідини</li>
+                        <li>• Неправильну експлуатацію</li>
+                        <li>• Втручання некваліфікованих спеціалістів</li>
+                        <li>• Природний знос</li>
+                    </ul>
+                    
+                    <h5>Як отримати гарантійне обслуговування:</h5>
+                    <ol style="margin: 20px 0; padding-left: 20px;">
+                        <li>Зверніться до нашого сервісного центру</li>
+                        <li>Надайте чек або виписку з замовлення</li>
+                        <li>Опишіть проблему з товаром</li>
+                        <li>Отримайте діагностику протягом 3 днів</li>
+                        <li>Отримайте відремонтований або новий товар</li>
+                    </ol>
+                    
+                    <div style="background: #dbeafe; padding: 15px; border-radius: 8px; border-left: 4px solid #2563eb; margin-top: 20px;">
+                        <strong>📞 Сервісна підтримка:</strong> (044) 123-45-67<br>
+                        <strong>✉️ Email:</strong> service@techaccessory.ua<br>
+                        <strong>🏢 Адреса:</strong> Київ, вул. Хрещатик, 1, сервісний центр
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="returnModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Повернення товару</h3>
+                <button class="close-btn" onclick="closeModal('returnModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-content">
+                    <h4>Політика повернення</h4>
+                    <p>Ви можете повернути товар протягом 14 днів з моменту покупки згідно із Законом України "Про захист прав споживачів".</p>
+                    
+                    <h5>Умови повернення:</h5>
+                    <ul style="margin: 20px 0;">
+                        <li>• Товар не був у використанні</li>
+                        <li>• Збережено товарний вигляд і упаковку</li>
+                        <li>• Наявні всі ярлики та пломби</li>
+                        <li>• Є чек або інше підтвердження покупки</li>
+                    </ul>
+                    
+                    <h5>Товари, які не підлягають поверненню:</h5>
+                    <ul style="margin: 20px 0;">
+                        <li>• Захисне скло та плівки після розпакування</li>
+                        <li>• Чохли після зняття захисної плівки</li>
+                        <li>• Кабелі після використання</li>
+                        <li>• Товари зі слідами механічних пошкоджень</li>
+                    </ul>
+                    
+                    <h5>Процедура повернення:</h5>
+                    <ol style="margin: 20px 0; padding-left: 20px;">
+                        <li>Заповніть заяву на повернення</li>
+                        <li>Упакуйте товар в оригінальну упаковку</li>
+                        <li>Відправте Новою Поштою за наш рахунок</li>
+                        <li>Чекайте перевірки товару (1-3 дні)</li>
+                        <li>Отримайте кошти назад (до 5 днів)</li>
+                    </ol>
+                    
+                    <div style="background: #dcfce7; padding: 15px; border-radius: 8px; border-left: 4px solid #10b981; margin-top: 20px;">
+                        <strong>✓ Безкоштовне повернення:</strong> При відправці Новою Поштою вкажіть номер замовлення - ми оплатимо доставку!
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: var(--gray-50); border-radius: 8px;">
+                        <strong>Контакти для повернення:</strong><br>
+                        📞 (044) 123-45-67<br>
+                        ✉️ returns@techaccessory.ua
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
