@@ -3,44 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechAccessory CRM - Вхід</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Вхід в адмін-панель | TechAccessory</title>
     <link rel="stylesheet" href="css/admin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="login-page">
     <div class="login-container">
-        <div class="login-card">
+        <div class="login-box">
             <div class="login-logo">
-                <i class="fas fa-mobile-alt"></i>
-                <h1>TechAccessory CRM</h1>
-                <p>Система управління магазином</p>
+                <i class="fas fa-mobile-alt"></i> TechAccessory
             </div>
-            
-            <form id="loginForm" class="login-form">
+            <h2>Вхід в адмін-панель</h2>
+            <form id="loginForm" onsubmit="login(event)">
                 <div class="form-group">
-                    <label for="username"><i class="fas fa-user"></i> Логін</label>
-                    <input type="text" id="username" placeholder="admin" required>
+                    <label>Логін</label>
+                    <input type="text" id="username" required placeholder="admin">
                 </div>
-                
                 <div class="form-group">
-                    <label for="password"><i class="fas fa-lock"></i> Пароль</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
+                    <label>Пароль</label>
+                    <input type="password" id="password" required placeholder="admin123">
                 </div>
-                
-                <button type="submit" class="btn btn-primary btn-block">
-                    <i class="fas fa-sign-in-alt"></i> Увійти
-                </button>
-                
-                <div class="login-hint">
-                    <p>Демо доступ:</p>
-                    <code>admin / admin123</code>
-                </div>
+                <button type="submit" class="btn-primary">Увійти</button>
+                <p class="login-hint">Логін: admin | Пароль: admin123</p>
             </form>
         </div>
     </div>
-    
     <script src="js/login.js"></script>
 </body>
 </html>
