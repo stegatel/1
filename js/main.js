@@ -84,102 +84,18 @@ const app = {
             });
         });
 
-        // Phone input mask
+        // Phone input mask - FIXED
         const phoneInput = document.getElementById('custPhone');
         if (phoneInput) {
             phoneInput.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.startsWith('380')) {
-                    value = value.substring(3);
+                let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+                if (!x[2]) {
+                    e.target.value = x[1] ? '+38' + x[1] : '';
+                    return;
                 }
-                if (value.length > 9) value = value.substring(0, 9);
-                
-                let formatted = '+380';
-                if (value.length > 0) formatted += ' (' + value.substring(0, 2);
-                if (value.length > 2) formatted += ') ' + value.substring(2, 5);
-                if (value.length > 5) formatted += '-' + value.substring(5, 7);
-                if (value.length > 7) formatted += '-' + value.substring(7, 9);
-                
-                e.target.value = formatted;
+                e.target.value = !x[3] ? '+38 (' + x[2] : '+38 (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
             });
         }
-    },
-
-    renderProducts() {
-        const grid = document.getElementById('productsGrid');
-        if (!grid) return;
-
-        let products = [...this.data.products];
-
-        // Filter by category
-        if (this.data.currentCategory !== 'all') {
-            products = products.filter(p => p.category === this.data.currentCategory);
-        }
-
-        // Search filter
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput && searchInput.value.trim()) {
-            const query = searchInput.value.toLowerCase();
-            products = products.filter(p => 
-                p.name.toLowerCase().includes(query) ||
-                p.sku.toLowerCase().includes(query) ||
-                p.barcode.includes(query)
-            );
-        }
-
-        // Sort
-        const sortSelect = document.getElementById('sortSelect');
-        if (sortSelect) {
-            switch(sortSelect.value) {
-                case 'price-asc': products.sort((a,b) => a.price - b.price); break;
-                case 'price-desc': products.sort((a,b) => b.price - a.price); break;
-                case 'name': products.sort((a,b) => a.name.localeCompare(b.name)); break;
-            }
-        }
-
-        grid.innerHTML = products.map(product => {
-            const inWishlist = this.data.wishlist.includes(product.id);
-            const inCompare = this.data.compare.includes(product.id);
-            
-            let stockClass = 'stock-in';
-            let stockText = 'В наявності';
-            if (product.stock <= 5) {
-                stockClass = 'stock-low';
-                stockText = 'Закінчується';
-            }
-            if (product.stock === 0) {
-                stockClass = 'stock-out';
-                stockText = 'Немає в наявності';
-            }
-
-            return `
-                <div class="product-card">
-                    ${product.badge ? `<div class="product-badges"><span class="badge-${product.badge}">${this.getBadgeText(product.badge)}</span></div>` : ''}
-                    <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
-                    <div class="product-info">
-                        <div class="product-category">${this.getCategoryName(product.category)}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-rating">${this.renderStars(product.rating)}</div>
-                        <div class="product-price">
-                            <span class="current-price">${product.price} грн</span>
-                            ${product.oldPrice ? `<span class="old-price">${product.oldPrice} грн</span>` : ''}
-                        </div>
-                        <div class="stock-status ${stockClass}">${stockText} (${product.stock} шт)</div>
-                        <div class="product-actions">
-                            <button class="btn-add-cart" onclick="app.addToCart(${product.id})" ${product.stock === 0 ? 'disabled' : ''}>
-                                ${product.stock === 0 ? 'Немає' : 'У кошик'}
-                            </button>
-                            <button class="btn-icon ${inWishlist ? 'active' : ''}" onclick="app.toggleWishlistItem(${product.id})">
-                                <i class="${inWishlist ? 'fas' : 'far'} fa-heart"></i>
-                            </button>
-                            <button class="btn-icon ${inCompare ? 'active' : ''}" onclick="app.toggleCompareItem(${product.id})">
-                                <i class="fas fa-exchange-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
     },
 
     getBadgeText(badge) {
